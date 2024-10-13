@@ -1,0 +1,6 @@
+
+*.pack
+*.old
+*.angular
+node_modules/*
+
