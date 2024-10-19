@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -7,16 +7,28 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./pie-chart-sample.component.scss'],
 })
 export class PieChartSampleComponent {
-  public myPieChart: any;
+  myPieChart: any = [];
+  @Input() chartId!: string;
 
   ngOnInit() {
+    //this.loadChart();
+  }
+
+  removeItemsWithName(): void {
+    if (this.myPieChart) {
+       let chart = this.myPieChart;
+       chart.destroy();
+    }
+  }
+
+
+  loadChart() {
     this.createChart();
   }
 
   createChart() {
-    this.myPieChart = new Chart('MyChart', {
+    let chart = new Chart(this.chartId, {
       type: 'pie', //this denotes tha type of chart
-
       data: {
         // values on X-Axis
         labels: ['Car 1', 'Car 2', 'Car 3', 'Car 4', 'Car 5', 'Car 6', 'Car 7'],
@@ -38,8 +50,9 @@ export class PieChartSampleComponent {
         ],
       },
       options: {
-        aspectRatio: 5.5,
+        aspectRatio: 8.5,
       },
     });
+    this.myPieChart = chart;
   }
 }

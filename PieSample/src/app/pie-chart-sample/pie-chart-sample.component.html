@@ -1,4 +1,7 @@
 <p>pie-chart-sample works!</p>
-<div class="chart-container">
-  <canvas  id="MyChart" >{{ myPieChart }}</canvas>
+<div class="chart-container" id="chart-container">
+  <!-- <div>
+    {{chartId}}
+  </div> -->
+  <canvas [id]="chartId">{{ myPieChart }}</canvas>
 </div>
