@@ -22,7 +22,7 @@ ng v
 
 ![Screenshot for Angular CLI](/images/3.1.png)
 
-### 4. Install VS Coode from https://code.visualstudio.com/
+### 4. Install VS Code from https://code.visualstudio.com/
 
 ### 5. Open CMD in required directory and run below command
 
