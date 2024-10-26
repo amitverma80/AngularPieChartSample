@@ -10,10 +10,18 @@ export class PieChartSampleComponent {
   myPieChart: any = [];
   @Input() chartId!: string;
 
-  ngOnInit() {
-    //this.loadChart();
-  }
+  constructor() {}
 
+  /**
+   * Removes the chart with the given name if it exists.
+   *
+   * This is necessary because ng2-charts is not designed to be destroyed and recreated.
+   * If we just call `loadChart()` on each component, it will try to create a new chart
+   * while the old one is still present, which will cause a memory leak.
+   *
+   * So we first destroy the old charts by calling `removeItemsWithName()`, and then
+   * we create the new charts by calling `loadChart()`.
+   */
   removeItemsWithName(): void {
     if (this.myPieChart) {
        let chart = this.myPieChart;
@@ -22,10 +30,26 @@ export class PieChartSampleComponent {
   }
 
 
+  /**
+   * Creates a new chart. This is called by the parent component.
+   *
+   * We call `createChart()` instead of directly loading the chart here because
+   * `createChart()` will be called again when the chart is refreshed.
+   */
   loadChart() {
     this.createChart();
   }
 
+  /**
+   * Creates and initializes a pie chart using the Chart.js library.
+   *
+   * The chart is configured with a specific set of labels and datasets representing
+   * car sales values. It uses distinct background colors for each segment and has
+   * a hover offset effect.
+   *
+   * The chart is rendered in the HTML element associated with `chartId` and is
+   * stored in the `myPieChart` property for future reference or manipulation.
+   */
   createChart() {
     let chart = new Chart(this.chartId, {
       type: 'pie', //this denotes tha type of chart
